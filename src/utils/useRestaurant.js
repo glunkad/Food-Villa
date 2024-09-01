@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 
 const useRestaurant = (resId) => {
     const [restaurant, setRestaurant] = useState(null);
-    const [menu, setMenu] = useState([])
+    const [menu, setMenu] = useState(null)
 
     useEffect(() => {
         getRestaurantInfo()
