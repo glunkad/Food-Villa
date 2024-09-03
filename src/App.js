@@ -1,12 +1,11 @@
 import "./index.css"
 import Header from "./components/Header";
-import Body from "./components/Body";
 import Footer from "./components/Footer";
-import About from "./components/About";
-import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom"
-import Contact from "./components/Contact";
+import { Outlet} from "react-router-dom"
 import {useState} from "react";
 import UserContext from "./utils/UserContext";
+import {Provider} from "react-redux"
+import store from "./utils/store"
 /*
 Header
 Body
@@ -30,13 +29,16 @@ const AppLayout = () => {
     });
 
     return (
-        <UserContext.Provider value={{user: user}}>
+        <Provider store={store}>
+            <UserContext.Provider value={{user: user}}>
 
-            <Header />
-            <Outlet />
-            <Footer />
+                <Header />
+                <Outlet />
+                <Footer />
 
-        </UserContext.Provider>
+            </UserContext.Provider>
+        </Provider>
+
     )
 }
 

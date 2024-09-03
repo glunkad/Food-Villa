@@ -2,11 +2,13 @@ import {useState, useContext} from "react";
 import {Link} from "react-router-dom";
 import Logo from "../assets/logo.svg"
 import UserContext from "../utils/UserContext";
+import {useSelector} from "react-redux";
 
 const loggedInUser = () => {
     // API call to check authentication
     return true;
 }
+
 
 
 // SPA - single page application
@@ -27,6 +29,9 @@ const Header = () => {
 
     const { user } = useContext(UserContext);
 
+    const cartItems = useSelector(store => store.cart.items);
+    console.log(cartItems);
+
     return (
         <div className="flex justify-between bg-red-50">
             <Title />
@@ -35,7 +40,7 @@ const Header = () => {
                     <li key={"home"} className="px-2"><Link to="/">Home</Link></li>
                     <li key={"about"} className="px-2"><Link to="/about">About</Link></li>
                     <li key={"contact"} className="px-2"><Link to="/contact">Contact</Link></li>
-                    <li key={"cart"} className="px-2"><Link to="/cart">Cart</Link></li>
+                    <li key={"cart"} className="px-2"><Link to="/cart">Cart - {cartItems.length} Items</Link></li>
                     <li key={"instamart"} className="px-2"><Link to="/instamart">Instamart</Link></li>
                 </ul>
             </div>
