@@ -16,7 +16,7 @@ const Body = () => {
     }, []);
 
     async function getRestaurants() {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.61610&lng=73.72860&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.61610&lng=73.72860");
         const json = await data.json();
         setAllRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
@@ -39,6 +39,7 @@ const Body = () => {
         <>
             <div className="search-container p-5 bg-red-50 my-5">
                 <input
+                    data-testid="search-input"
                     type="text"
                     className="focus:bg-green-400 m-2 p-2"
                     placeholder="Search"
@@ -46,6 +47,7 @@ const Body = () => {
                     onChange={(e) => setSearchText(e.target.value)}
                 />
                 <button
+                    data-searchid="search-btn"
                     className="search-btn p-2 m-2 bg-purple-500 hover:bg-amber-400 text-white rounded-md"
                     onClick={() => {
                         const data = filterData(searchText, allRestaurants);
@@ -55,7 +57,7 @@ const Body = () => {
                     Search
                 </button>
             </div>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap" data-testid="res-list">
             {
                     filteredRestaurants.map((restaurant) => (
                         <Link to={"/restaurant/"+ restaurant.info.id} key={restaurant.info.id}>

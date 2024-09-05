@@ -21,8 +21,6 @@ const useOnline = () => {
         }
     }, []);
 
-
-
     return isOnline;
 }
 
